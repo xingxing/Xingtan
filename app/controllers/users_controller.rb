@@ -4,9 +4,10 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.students.new(params[:user])
+    @user = User.new(params[:user])
     if @user.save
-      redirect_to users_path
+      session[:current_user] = @user.id
+      redirect_to edit_user_path(@user)
     else
       render :action=>"new"
     end
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
     @students = User.students.find(:all,:order=>"created_at desc",:limit=>10)
   end
   
-  def profile
+  def edit
     
   end
 end
