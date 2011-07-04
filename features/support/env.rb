@@ -17,7 +17,7 @@ require 'webrat'
 require 'webrat/core/matchers'
 
 Webrat.configure do |config|
-  config.mode = :rails
+  config.mode = :selenium
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
 
@@ -45,7 +45,7 @@ ActionController::Base.allow_rescue = false
 # after each scenario, which can lead to hard-to-debug failures in 
 # subsequent scenarios. If you do this, we recommend you create a Before
 # block that will explicitly put your database in a known state.
-Cucumber::Rails::World.use_transactional_fixtures = true
+Cucumber::Rails::World.use_transactional_fixtures = false
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
 if defined?(ActiveRecord::Base)
@@ -55,3 +55,14 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
+
+class ActiveSupport::TestCase
+  setup do |session|
+    session.host! "localhost:3001"
+  end
+end
+
+After do
+  User.destroy_all
+end
+

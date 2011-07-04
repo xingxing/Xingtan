@@ -1,0 +1,12 @@
+- form_for @user do |f|
+  %p
+    = f.label "姓名"
+    = f.text_field :name
+  %p 
+    = f.label "密码"
+    = f.text_field :password
+  %p
+    = f.label "重复密码"
+    %input{:name=>"user_password_again"}
+  %p 
+    = f.submit "注册"
