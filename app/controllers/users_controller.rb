@@ -22,11 +22,12 @@ class UsersController < ApplicationController
   end
 
   # GET
+  # 通过姓名列出用户的基本信息
   def users_info_by_name
     @users = User.find_all_by_name(params[:name])
     respond_to do |format|
       format.html { render :action => :index }
-      format.xml  { render :json => @users }
+      format.json  { render :json => @users }
     end
   end
 
