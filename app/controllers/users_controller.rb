@@ -1,4 +1,20 @@
 class UsersController < ApplicationController
+
+  def authenticate 
+   if  current_user=User.authenticate(params[:user][:name],params[:user][:password])
+     session[:current_user] = current_user.id 
+     #render :text=>"你好，#{params[:user][:name]}"
+     redirect_to center_user_path(:id=>session[:current_user])
+   else
+     flash[:notice] = "用户名或者密码错误"
+     redirect_to "/login" 
+   end
+  end
+  
+  def login
+
+  end
+
   def new
     @user = User.new
   end
