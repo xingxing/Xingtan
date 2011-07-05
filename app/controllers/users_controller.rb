@@ -14,11 +14,20 @@ class UsersController < ApplicationController
   end
   
   def index
-    @student_count = User.students.count
-    @students = User.students.find(:all,:order=>"created_at desc",:limit=>10)
+    @users = User.all
   end
   
   def edit
     
   end
+
+  # GET
+  def users_info_by_name
+    @users = User.find_all_by_name(params[:name])
+    respond_to do |format|
+      format.html { render :action => :index }
+      format.xml  { render :json => @users }
+    end
+  end
+
 end
