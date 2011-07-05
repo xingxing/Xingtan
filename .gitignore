@@ -1,2 +1,8 @@
-log/*.log
-db/schema.rb
+*.log
+schema.rb
+#emacs语法检查文件很烦人
+*flymake*.rb
+*.swp
+/tmp
+log/
+spider/log_spider
