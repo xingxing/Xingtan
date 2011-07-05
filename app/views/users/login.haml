@@ -1,0 +1,10 @@
+- form_tag authenticate_users_path,:method=>:post do |f|
+
+  %p
+    = label :user,:name,"姓名"
+    = text_field :user,:name,:size=>40
+  %p 
+    = label :user,:password,"密码"
+    = password_field :user,:password,:size=>40
+  %p 
+    = submit_tag "登录"
