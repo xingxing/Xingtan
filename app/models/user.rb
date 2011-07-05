@@ -2,6 +2,7 @@ require 'digest/sha2'
 
 class User < ActiveRecord::Base
   validates_presence_of :name, :message => "请输入您的在册姓名"
+  validates_uniqueness_of :name, :message => "用户名已经被占用"
   validates_presence_of :password,:message => "密码不可以为空"
   
   validates_presence_of :student_id, :on=>:update,:message => "请输入您的学号"
