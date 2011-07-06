@@ -14,10 +14,18 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-   map.resources :users
+   map.resources :users,:collection => {:authenticate => :post },:member=>{ :center=>:get }
   
-   map.signup 'signup',:controller=>:users,:action=>:new,:method=>:get
+   map.users_info_by_name '/users/name_is/:name.:format',:controller => 'users', 
+                                                     :action => 'users_info_by_name', 
+                                                     :conditions => { :method => :get }
+                                                     
+
   
+   map.signup '/signup',:controller=>:users,:action=>:new,:method=>:get
+  
+   map.login '/login',:controller=>:users,:action=>:login,:method=>:get
+ 
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller

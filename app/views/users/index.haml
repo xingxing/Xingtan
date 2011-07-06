@@ -1,6 +1,13 @@
+%table
+  %tr
+    %th 
+      姓名
+    %th
+      身份
 
-= "#{@student_count}名学生"
-
-- @students.each do |student|
-  %p 
-    = student.name
+- @users.each do |user|
+  %tr
+    %td
+      = h user.name
+      = h user.identity
+      = link_to 'Show', user

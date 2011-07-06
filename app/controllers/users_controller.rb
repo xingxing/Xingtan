@@ -1,4 +1,26 @@
 class UsersController < ApplicationController
+  skip_before_filter :authorize,:only=>[:login,:authenticate,:new,:create,:users_info_by_name]
+  
+  def authenticate 
+   if  current_user=User.authenticate(params[:user][:name],params[:user][:password])
+     session[:current_user] = current_user.id 
+     redirect_to center_user_path(:id=>session[:current_user])
+   else
+     flash[:notice] = "用户名或者密码错误"
+     redirect_to "/login" 
+   end
+  end
+ 
+  def center
+    
+  end
+
+  
+  
+  def login
+
+  end
+
   def new
     @user = User.new
   end
@@ -14,11 +36,21 @@ class UsersController < ApplicationController
   end
   
   def index
-    @student_count = User.students.count
-    @students = User.students.find(:all,:order=>"created_at desc",:limit=>10)
+    @users = User.all
   end
   
   def edit
     
   end
+
+  # GET
+  # 通过姓名列出用户的基本信息
+  def users_info_by_name
+    @users = User.find_all_by_name(params[:name])
+    respond_to do |format|
+      format.html { render :action => :index }
+      format.json  { render :json => @users }
+    end
+  end
+
 end
