@@ -11,8 +11,9 @@ When /^: 注册成为学生$/ do
 end
 
 Then /^: 我的身份应该是注册用户$/ do
+  
   visit users_info_by_name_path :name=>"颜回"
-  response.should contain("user" )  
+  response.should contain("学生" )  
 end
 
 Then /^: 我的姓名是颜回$/ do
