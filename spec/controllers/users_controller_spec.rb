@@ -44,7 +44,6 @@ describe UsersController do
 
 
   describe "POST create" do
-
     before do
       @student = User.new
       User.stub!(:new).and_return @student
@@ -83,6 +82,36 @@ describe UsersController do
         post :create
         session[:current_user].should eql(1) 
       end
+    end
+  end
+
+  describe "PUT update" do 
+    let(:current_user){mock_model(User)}
+    
+    before(:each) do
+      controller.stub!(:current_user).and_return(current_user)
+      # User.stub(:find).and_return(current_user)
+    end
+  
+    it "应该更新当前用户的基本资料" do
+      current_user.should_receive(:update_attributes)
+      put :update
+    end
+    
+    context "更新成功" do
+      before do
+        current_user.stub!(:update_attributes).and_return(true) 
+      end
+      
+      it "应该重定向到用户中心页面" do
+        put :update
+        response.should redirect_to(center_user_path(current_user))
+      end
+      
+    end
+
+    context "更新失败" do
+      
     end
   end
 end

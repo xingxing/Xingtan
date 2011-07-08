@@ -13,14 +13,13 @@ class ApplicationController < ActionController::Base
   protected
   
   def  authorize
-    current_user
-    unless @current_user
+    unless current_user
       flash[:notice] = "请您登录"
       redirect_to login_path
     end
   end
  
   def current_user
-    @current_user = User.find_by_id(session[:current_user])
+    User.find_by_id(session[:current_user])
   end
 end

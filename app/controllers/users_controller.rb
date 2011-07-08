@@ -12,10 +12,8 @@ class UsersController < ApplicationController
   end
  
   def center
-    
+    @current_user = current_user
   end
-
-  
   
   def login
 
@@ -53,4 +51,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # 修改学生的基本信息
+  def update
+   if current_user.update_attributes(params[:user])
+     redirect_to center_user_path(current_user)
+   else
+     render :action=>:edit
+   end
+  end
 end

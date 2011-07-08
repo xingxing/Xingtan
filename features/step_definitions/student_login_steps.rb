@@ -32,8 +32,9 @@ end
 
 Then /^:  重新渲染登录页面$/ do
   current_url.should =~ /login/
- end
+end
 
 Then /^: 你会看到用户名或者密码错误的提示$/ do
+  response.should
   response.should contain("用户名或者密码错误" )
 end
