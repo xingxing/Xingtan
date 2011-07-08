@@ -1,0 +1,11 @@
+- form_for(@current_user) do |f|
+  = f.error_messages 
+
+  %p
+    = f.label :name,"姓名"
+    = f.text_field :name,:size=>40
+  %p
+    = f.label :student_id,"学号"
+    = f.text_field :student_id, :size => 40 
+  %p 
+    = f.submit "修改"
