@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize,:only=>[:login,:authenticate,:new,:create,:users_info_by_name]
   
+  before_filter :open_registration?,:only=>[:new,:create]
+  
   def authenticate 
    if  current_user=User.authenticate(params[:user][:name],params[:user][:password])
      session[:current_user] = current_user.id 
