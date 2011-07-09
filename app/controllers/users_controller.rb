@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
   
   def edit
-    
+    @current_user = current_user
   end
 
   # GET
@@ -55,10 +55,11 @@ class UsersController < ApplicationController
 
   # 修改学生的基本信息
   def update
-   if current_user.update_attributes(params[:user])
+    @current_user =  current_user
+    if @current_user.update_attributes(params[:user])
      redirect_to center_user_path(current_user)
    else
-     render :action=>:edit
+     render :action=> :edit
    end
   end
 end
