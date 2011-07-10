@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
    map.signup '/signup',:controller=>:users,:action=>:new,:method=>:get
   
    map.login '/login',:controller=>:users,:action=>:login,:method=>:get
+  
+   map.resources :system_settings
  
 
   # Sample resource route with sub-resources:
