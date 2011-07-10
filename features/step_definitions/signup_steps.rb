@@ -1,5 +1,5 @@
 Given /^: 我的名字叫颜回$/ do
-  
+  SystemSetting.create!(:open_registration=>true)
 end
 
 When /^: 注册成为学生$/ do

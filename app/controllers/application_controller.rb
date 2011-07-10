@@ -22,4 +22,19 @@ class ApplicationController < ActionController::Base
   def current_user
     User.find_by_id(session[:current_user])
   end
+ 
+  def open_registration?
+     unless  SystemSetting.first or  SystemSetting.first.open_registration 
+       flash[:notice]="抱歉，本系统尚未开放注册"
+       redirect_to login_path
+     end
+  end
+ 
+  # 检查 权限
+  def check_permissions
+    unless current_user.identity.eql?("教师")
+       flash[:notice] = "抱歉，您没有相关权限"
+      redirect_to center_user_path current_user
+    end
+  end
 end

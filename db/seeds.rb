@@ -5,3 +5,12 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+SystemSetting.create
+User.create(
+            :name=>"Confucius",
+            :password=>"Confucius_123",
+            :student_id=>"0",
+            :identity=>"教师"
+               )
+

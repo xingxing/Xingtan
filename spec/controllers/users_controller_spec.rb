@@ -48,51 +48,73 @@ describe UsersController do
       @student = User.new
       User.stub!(:new).and_return @student
     end
-  
-    it "应该创建用户" do
-      @student.should_receive(:save)             
-      post :create
-    end
-      
-    
-    
-    context "当保存不成功时" do
+   
+   context "关闭注册时" do
       before do
-        @student.stub!(:save).and_return false
-      end 
+        system_settings = mock_model(SystemSetting,:open_registration=>false)
+        SystemSetting.stub!(:first).and_return(system_settings)
+      end
       
-      it "应该重新渲染注册页面" do
+      it "应该重定向到" do
         post :create
-        response.should render_template("new" )
+        response.should redirect_to login_path
+      end
+      
+      it "应该在flash通知中添加:抱歉，本系统尚未开放注册" do
+        post :create
+        flash[:notice].should == "抱歉，本系统尚未开放注册"
       end
     end
     
-    context "当保存成功时" do
+    
+    context "开放注册时" do   
       before do
-        @student.stub!(:save).and_return @student
-        @student.stub!(:id).and_return(1)
-      end
-       
-      it "应该重定向填写档案的页面" do
-        post :create
-        response.should redirect_to(:action => "edit",:id=>1 )
+        system_settings = mock_model(SystemSetting,:open_registration=>true)
+        SystemSetting.stub!(:first).and_return(system_settings)
       end
       
-      it "设置session" do
+      it "应该创建用户" do
+        @student.should_receive(:save)             
         post :create
-        session[:current_user].should eql(1) 
+      end
+      
+      context "当保存不成功时" do
+        before do
+          @student.stub!(:save).and_return false
+        end 
+        
+        it "应该重新渲染注册页面" do
+          post :create
+          response.should render_template("new" )
+        end
+      end
+      
+      context "当保存成功时" do
+        before do
+          @student.stub!(:save).and_return @student
+          @student.stub!(:id).and_return(1)
+        end
+        
+        it "应该重定向填写档案的页面" do
+          post :create
+          response.should redirect_to(:action => "edit",:id=>1 )
+        end
+        
+        it "设置session" do
+          post :create
+          session[:current_user].should eql(1) 
+        end
       end
     end
   end
-
+  
   describe "PUT update" do 
     let(:current_user){mock_model(User)}
     
     before(:each) do
       controller.stub!(:current_user).and_return(current_user)
-      # User.stub(:find).and_return(current_user)
     end
-  
+    
     it "应该更新当前用户的基本资料" do
       current_user.should_receive(:update_attributes)
       put :update
@@ -111,7 +133,12 @@ describe UsersController do
     end
 
     context "更新失败" do
+      before { current_user.stub!(:update_attributes).and_return(nil) }
       
+      it "应该重新渲染编辑页面" do
+        put :update
+        response.should render_template("edit") 
+      end
     end
   end
 end

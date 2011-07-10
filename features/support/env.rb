@@ -64,5 +64,6 @@ end
 
 After do
   User.destroy_all
+  SystemSetting.destroy_all
 end
 
