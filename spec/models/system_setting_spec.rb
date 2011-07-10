@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SystemSeting do
+describe SystemSetting do
   before(:each) do
     @valid_attributes = {
       
