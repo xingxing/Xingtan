@@ -8,6 +8,6 @@ describe SystemSetting do
   end
 
   it "should create a new instance given valid attributes" do
-    SystemSeting.create!(@valid_attributes)
+    SystemSetting.create!(@valid_attributes)
   end
 end

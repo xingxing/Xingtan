@@ -1,4 +1,4 @@
-class CreateSystemSetings < ActiveRecord::Migration
+class CreateSystemSettings < ActiveRecord::Migration
   def self.up
     create_table :system_settings do |t|
       t.boolean :open_registration,:default=>0

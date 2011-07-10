@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
  
   def open_registration?
-     unless  SystemSeting.first and  SystemSeting.first.open_registration 
+     unless  SystemSetting.first and  SystemSetting.first.open_registration 
        flash[:notice]="抱歉，本系统尚未开放注册"
        redirect_to login_path
      end

@@ -51,8 +51,8 @@ describe UsersController do
    
    context "关闭注册时" do
       before do
-        system_settings = mock_model(SystemSeting,:open_registration=>false)
-        SystemSeting.stub!(:first).and_return(system_settings)
+        system_settings = mock_model(SystemSetting,:open_registration=>false)
+        SystemSetting.stub!(:first).and_return(system_settings)
       end
       
       it "应该重定向到" do
@@ -69,8 +69,8 @@ describe UsersController do
     
     context "开放注册时" do   
       before do
-        system_settings = mock_model(SystemSeting,:open_registration=>true)
-        SystemSeting.stub!(:first).and_return(system_settings)
+        system_settings = mock_model(SystemSetting,:open_registration=>true)
+        SystemSetting.stub!(:first).and_return(system_settings)
       end
       
       it "应该创建用户" do
