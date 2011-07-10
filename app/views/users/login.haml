@@ -1,4 +1,4 @@
-- form_tag authenticate_users_path,:method=>:post do |f|
+- form_tag(authenticate_users_path,:method=>:post) do |f|
   = flash[:notice]
   %p
     = label :user,:name,"姓名"

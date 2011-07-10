@@ -1,0 +1,11 @@
+- form_for(@system_setting) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :open_registration,"是否开放注册:"
+    = f.radio_button :open_registration,true
+    开放  
+    = f.radio_button :open_registration,false
+    关闭 
+  %p
+    =f.submit "修改"
