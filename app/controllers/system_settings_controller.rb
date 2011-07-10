@@ -7,6 +7,8 @@ class SystemSettingsController < ApplicationController
 
   def update
     @system_setting = SystemSetting.first
-    @system_setting.update_attributes(params[:system_setting])
+    if @system_setting.update_attributes(params[:system_setting])
+      redirect_to center_user_path(current_user)
+    end
   end
 end
