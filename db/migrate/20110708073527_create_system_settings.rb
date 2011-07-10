@@ -1,6 +1,6 @@
 class CreateSystemSetings < ActiveRecord::Migration
   def self.up
-    create_table :system_setings do |t|
+    create_table :system_settings do |t|
       t.boolean :open_registration,:default=>0
 
       t.timestamps
@@ -8,6 +8,6 @@ class CreateSystemSetings < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :system_setings
+    drop_table :system_settings
   end
 end
