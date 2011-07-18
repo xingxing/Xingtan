@@ -1,0 +1,26 @@
+%p
+  %b 
+    标题:
+    =h @topic.title
+
+%p
+  %b
+    作业要求:
+    =h @topic.description
+
+%p
+  %b
+    所属课程:
+    =h @topic.course.name
+%p
+  %b
+    上交截至日期:
+    =h @topic.deadline.strftime("%Y-%m-%d %X")
+%p
+  %b
+    作业状态:
+    =h @topic.state
+
+= link_to '编辑', edit_topic_path(@topic)
+|
+= link_to '作业列表', topics_path

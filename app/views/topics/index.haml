@@ -1,0 +1,27 @@
+%h1
+  作业题目列表
+
+%table
+  %tr
+    %td
+      作业题目
+    %td
+      状态
+    %td
+      截至日期
+
+- @topics.each do |topic|
+  %tr
+    %td
+      = h topic.title
+    %td
+      = h topic.state
+    %td
+      = h topic.deadline.strftime("%Y-%m-%d %X")
+    %td
+      = link_to '详情', topic
+      = link_to '编辑', edit_topic_path(topic)
+      = link_to '删除', topic, :confirm => "你确定删除#{topic.title}这道题吗？", :method => :delete ,:id=>"destroy_#{topic.id}"
+%br
+
+= link_to '出作业', new_topic_path
