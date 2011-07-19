@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :topics
+  map.resources :topics,:collection=>{:published=>:get}
 
-  map.resources :courses
+  map.resources :courses,:has_many=>[:topics]
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
    map.signup '/signup',:controller=>:users,:action=>:new,:method=>:get
   
    map.login '/login',:controller=>:users,:action=>:login,:method=>:get
-  
+ 
    map.resources :system_settings
  
 
