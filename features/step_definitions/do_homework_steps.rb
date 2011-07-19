@@ -3,9 +3,9 @@ Given /^: 我访问诗的发布作业页面$/ do
 end
 
 When /^: 我选择 诗 这个课程$/ do
-  pending # express the regexp above with the code you wish you had
+  click_link "诗"
 end
 
 Then /^: 学而时习之 将出现载页面中$/ do
-  pending # express the regexp above with the code you wish you had
+  response.should contain("学而时习之")
 end

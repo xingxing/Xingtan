@@ -1,0 +1,10 @@
+= link_to "全部",published_topics_path
+%br
+- @courses.each do |course|
+  %b
+    = link_to course.name,published_course_topics_path(course)
+  %br
+ 
+- @topics.each do |topic|
+  = h topic.title
+  %br

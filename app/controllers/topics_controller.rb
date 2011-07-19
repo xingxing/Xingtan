@@ -1,6 +1,15 @@
 class TopicsController < ApplicationController
-  before_filter :check_permissions
- 
+  before_filter :check_permissions,:except=>[:published]
+
+  def published
+    @courses = Course.all    
+    if params[:course_id] 
+      @topics =Topic.published.find(:all,:conditions=>["course_id= ?",params[:course_id]])          
+    else
+      @topics =Topic.published
+    end
+  end
+
   # GET /topics
   # GET /topics.xml
   def index
