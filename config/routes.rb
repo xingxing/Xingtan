@@ -1,9 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :topics,:collection=>{:published=>:get}
+  map.resources :topics,:has_many=>:homeworks,:collection=>{:published=>:get}
 
   map.resources :courses do |courses|
     courses.resources :topics,:collection=>{:published=>:get}    
   end
+
+  map.resources :homeworks 
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
