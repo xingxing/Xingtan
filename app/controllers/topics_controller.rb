@@ -2,6 +2,7 @@ class TopicsController < ApplicationController
   before_filter :check_permissions,:except=>[:published]
 
   def published
+    @current_user = current_user
     @courses = Course.all    
     if params[:course_id] 
       @topics =Topic.published.find(:all,:conditions=>["course_id= ?",params[:course_id]])          

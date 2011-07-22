@@ -17,3 +17,13 @@ end
 Then /^: 应该跳到上传作业页面$/ do
   current_url.should =~ /topics\/\d+\/homeworks\/new/
 end
+
+When /^: 上传文件$/ do
+  attach_file '作业文件',"#{Rails.root}/spec/fixtures/论语.doc"
+  click_button "提交"
+end
+
+Then /^: 发布作业页面上应该显示 已交付$/ do
+  visit published_topics_path
+  response.should contain("已交付")
+end
