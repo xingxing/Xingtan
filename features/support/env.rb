@@ -66,5 +66,7 @@ end
 After do
   User.destroy_all
   SystemSetting.destroy_all
+  Homework.destroy_all
+  Topic.destroy_all
 end
 

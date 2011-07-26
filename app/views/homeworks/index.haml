@@ -1,0 +1,24 @@
+%h1
+  作业列表
+
+%table
+  %tr
+    %th
+      作业题目
+    %th
+      更新时间
+    %th
+      文件大小
+
+  - @homeworks.each do |homework|
+    %tr
+      %td
+        = h homework.topic.title
+      %td
+        = h homework.updated_at.strftime("%Y-%m-%d %X")
+      %td
+        = h homework.content_file_size_by_human 
+      %td
+        = link_to '详情', homework
+        = link_to '修改', edit_homework_path(homework)
+        = link_to '删除', homework, :confirm => "你确定删除这项作业吗？", :method => :delete ,:id=>"destroy_#{homework.id}"

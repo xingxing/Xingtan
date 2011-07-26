@@ -22,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-   map.resources :users,:collection => {:authenticate => :post },:member=>{ :center=>:get }
+  map.resources :users,:collection => {:authenticate => :post },:member=>{ :center=>:get } do |users|
+   users.resources :homeworks
+  end
   
    map.users_info_by_name '/users/name_is/:name.:format',:controller => 'users', 
                                                      :action => 'users_info_by_name', 

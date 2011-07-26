@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   attr_reader :password
 
+  has_many :homeworks
+
+
   class << self
     def authenticate(name, password)
       if user = find_by_name(name)
