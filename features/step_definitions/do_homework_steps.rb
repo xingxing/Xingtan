@@ -45,7 +45,22 @@ When /^: 重新上传作业$/ do
   click_button "提交"
 end
 
-Then  /^: 发布作业页面上应该显示 更新时间为上传时间$/ do
+Then  /^: 我的上传的作业页中会出现作业文件的大小$/ do
   visit user_homeworks_path(:user_id=>1)
   response.should contain("12.5KB")
+end
+
+When /^: 我访问我上传的作业页面，点击删除作业$/ do
+  visit user_homeworks_path(:user_id=>1)
+  selenium.click "//a[@id='destroy_1']"
+end
+
+Then /^: 会跳出确认信息: 你确定删除这项作业吗？$/ do
+  selenium.is_confirmation_present.should be_true
+  selenium.get_confirmation.should eql("你确定删除这项作业吗？") 
+ end
+
+Then /^: 我的上传的作业页中将不会出现这项作业$/ do
+  visit user_homeworks_path(:user_id=>1)
+  response.should_not contain("学而时习之")
 end

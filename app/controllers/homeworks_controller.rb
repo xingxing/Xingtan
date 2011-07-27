@@ -22,6 +22,15 @@ class HomeworksController < ApplicationController
     end
   end
 
+  def destroy
+    @homework = Homework.find(params[:id])
+    @homework.destroy
+    respond_to do |format|
+      format.html { redirect_to(request.request_uri) }
+      format.xml  { head :ok }
+    end
+  end
+
   
   def create
     @homework= Homework.new(params[:homework])
