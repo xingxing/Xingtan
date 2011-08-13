@@ -1,0 +1,13 @@
+= link_to "全部",published_topics_path
+|
+- @courses.each do |course|
+  %b
+    = link_to course.name,published_course_topics_path(course)
+  |
+ 
+- @topics.each do |topic|
+  %p
+    = h topic.title
+    = "已交付" if @current_user.has_submitted? topic
+    = link_to "上传作业",new_topic_homework_path(topic)
+  

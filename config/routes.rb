@@ -1,7 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :topics
+  map.resources :topics,:has_many=>:homeworks,:collection=>{:published=>:get}
 
-  map.resources :courses
+  map.resources :courses do |courses|
+    courses.resources :topics,:collection=>{:published=>:get}    
+  end
+
+  map.resources :homeworks 
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -18,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
-   map.resources :users,:collection => {:authenticate => :post },:member=>{ :center=>:get }
+  map.resources :users,:collection => {:authenticate => :post },:member=>{ :center=>:get } do |users|
+   users.resources :homeworks
+  end
   
    map.users_info_by_name '/users/name_is/:name.:format',:controller => 'users', 
                                                      :action => 'users_info_by_name', 
@@ -29,7 +35,7 @@ ActionController::Routing::Routes.draw do |map|
    map.signup '/signup',:controller=>:users,:action=>:new,:method=>:get
   
    map.login '/login',:controller=>:users,:action=>:login,:method=>:get
-  
+ 
    map.resources :system_settings
  
 

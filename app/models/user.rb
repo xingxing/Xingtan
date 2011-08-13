@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   attr_reader :password
 
+  has_many :homeworks
+
+
   class << self
     def authenticate(name, password)
       if user = find_by_name(name)
@@ -38,6 +41,14 @@ class User < ActiveRecord::Base
     end
   end
  
+
+  # 学生是否提交过作业?
+  # @param[Topic] 作业题
+  def has_submitted? topic
+    Homework.find_by_topic_id_and_user_id(topic[:id],self[:id]) ? true : false
+  end
+
+
   private
   
   def generate_salt

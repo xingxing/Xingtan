@@ -6,3 +6,4 @@ schema.rb
 /tmp
 log/
 spider/log_spider
+public/system

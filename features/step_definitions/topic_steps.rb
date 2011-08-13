@@ -21,7 +21,7 @@ Then /^: 在作业题列表中会出现这个题目$/ do
 end
 
 Given /^: 已经有一项作业叫做 学而时习之$/ do
-  Topic.create!(:id=>1,:title=>"学而时习之",:deadline=>Time.now)
+  Topic.create!(:id=>1,:title=>"学而时习之",:deadline=>Time.now,:state=>"发布",:course_id=>1)
 end
 
 When /^: 我在作业题列表，点击删除该作业题时$/ do

@@ -19,6 +19,7 @@ require 'webrat/core/matchers'
 Webrat.configure do |config|
   config.mode = :selenium
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
+  #config.selenium_browser_key = "*chrome"
 end
 
 
@@ -65,5 +66,7 @@ end
 After do
   User.destroy_all
   SystemSetting.destroy_all
+  Homework.destroy_all
+  Topic.destroy_all
 end
 
