@@ -1,0 +1,7 @@
+= "你好，#{@current_user.name} #{@current_user.identity}"
+= flash[:notice]
+%br 
+= link_to "修改基本资料",edit_user_path(@current_user)
+%br
+.user_menu
+  = user_menu @current_user

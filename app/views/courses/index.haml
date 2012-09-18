@@ -1,0 +1,20 @@
+%h1
+  课程列表
+
+%table
+  %tr
+    %th
+      课程名称
+    %th
+      操作
+
+  - @courses.each do |course|
+    %tr
+      %td
+        = h course.name
+      %td
+        = link_to '详细信息', course
+        = link_to '编辑', edit_course_path(course)
+        = link_to '删除', course, :confirm => "你确定删除#{course.name}这门课吗？", :method => :delete,:id=>"destroy_#{course.id}"
+
+= link_to '创建课程', new_course_path

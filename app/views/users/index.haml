@@ -1,0 +1,19 @@
+%table
+  %tr
+    %th 
+      姓名
+    %th
+      身份
+    %th
+      学号
+
+- @users.each do |user|
+  %tr
+    %td
+      = h user.name
+    %td  
+      = h user.identity
+    %td
+      = h user.student_id
+    %td  
+      = link_to 'Show', user

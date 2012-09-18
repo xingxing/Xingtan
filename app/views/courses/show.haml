@@ -1,0 +1,14 @@
+%p
+  %b 
+    课程名称:
+    =h @course.name
+
+%p
+  %b
+    课程简介:
+    =h @course.description
+
+
+= link_to '编辑', edit_course_path(@course)
+|
+= link_to '课程列表', courses_path

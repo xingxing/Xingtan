@@ -1,0 +1,17 @@
+%h1
+  创建课程
+-  form_for(@course) do |f|
+  = f.error_messages
+
+  %p
+    = f.label :name,"课程名称"
+    %br
+    = f.text_field :name
+  %p
+    = f.label :description,"课程简介"
+    %br
+    = f.text_area :description
+  %p
+    = f.submit '创建'
+
+= link_to '课程列表', courses_path
